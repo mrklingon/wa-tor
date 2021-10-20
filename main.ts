@@ -6,8 +6,7 @@ function mkShark () {
     }
 }
 function chkDensity () {
-    let list: number[] = []
-    return list.length + SHARK.length
+    return fish.length + SHARK.length
 }
 function mkFish () {
     if (30 > chkDensity()) {
