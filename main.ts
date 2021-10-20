@@ -14,28 +14,54 @@ input.onButtonPressed(Button.A, function () {
     pause2 += 1
     basic.clearScreen()
     basic.showString(convertToText(fish.length))
-    basic.pause(1000)
+    basic.pause(2000)
     pause2 = 0
 })
 input.onButtonPressed(Button.B, function () {
     pause2 += 1
     basic.clearScreen()
     basic.showString(convertToText(SHARK.length))
-    basic.pause(1000)
+    basic.pause(2000)
     pause2 = 0
 })
+let sc = 0
 let temp: game.LedSprite = null
 let pause2 = 0
+let list: null = null
 let sharkl: number[] = []
 let SHARK: game.LedSprite[] = []
 let fishl: number[] = []
 let fish: game.LedSprite[] = []
+images.createBigImage(`
+    . . . . . . . . . .
+    . # . # . . # . . .
+    # # # . . . . . . .
+    . # . # . . . # . .
+    . . . . . . . . . .
+    `).scrollImage(1, 200)
+images.createBigImage(`
+    . . . # . . . . . .
+    . . # # # . # . . .
+    . # # # # # . . . .
+    . . # # # . # . . .
+    . . . . . . . . . .
+    `).scrollImage(1, 200)
 fish = [game.createSprite(2, 2), game.createSprite(0, 0)]
 fishl = [0, 0]
 SHARK = [game.createSprite(4, 4), game.createSprite(3, 3)]
-sharkl = [10, 10]
+sharkl = [10, list]
 game.setLife(2)
 pause2 = 0
+loops.everyInterval(500, function () {
+    sc += 1
+    if (0 == SHARK.length * fishl.length) {
+        basic.showIcon(IconNames.Sad)
+        basic.pause(1000)
+        pause2 = 1
+        game.setScore(sc)
+        game.gameOver()
+    }
+})
 basic.forever(function () {
     if (pause2 == 0) {
         for (let value of SHARK) {
